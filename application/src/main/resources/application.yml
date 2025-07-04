@@ -28,3 +28,6 @@ spring:
 mybatis-plus:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+hcaptcha:
+  secret: ES_649fdcba8d5d4ce796a7abfdd170c4d2
