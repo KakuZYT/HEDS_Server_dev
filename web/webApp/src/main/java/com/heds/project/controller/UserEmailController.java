@@ -1,13 +1,11 @@
 package com.heds.project.controller;
 
 import com.heds.project.Service.ConsultationServer;
+import com.heds.project.config.captcha.HcaptchaService;
 import com.heds.project.config.modul.Consultation;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import com.heds.project.utils.MailService;
 import com.heds.project.mapper.ConsultationMapper;
 @RestController
@@ -17,8 +15,13 @@ public class UserEmailController {
     private MailService mailService;
     @Autowired
     private ConsultationMapper consultationMapper;
+    @Autowired
+    private HcaptchaService hcaptchaService;
     @PostMapping("/submit")
-    public void submitInquiry(@RequestBody Consultation consultation) {
+    public void submitInquiry(@RequestBody Consultation consultation,@RequestParam String captchaToken) {
+        if (!hcaptchaService.verifyToken(captchaToken)) {
+            throw new RuntimeException("验证码无效");
+        }
         System.out.println("接收到的数据：" + consultation);
         String to = "kaku616263@gmail.com"; // 收件人
         String subject = "咨询邮件";

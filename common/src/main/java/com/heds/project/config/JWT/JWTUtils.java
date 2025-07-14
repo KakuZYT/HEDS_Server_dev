@@ -11,11 +11,10 @@ import java.util.Date;
 @Component
 public class JWTUtils {
 
-        private final String secretKey = "@./(0=0)/HEDS- (｢・ω・) · \\_(ツ)_/¯ · (◕ H ◕) · (／‵Д′)／-Secret-Key-i,.?w91j23ns9";
+    private final String secretKey = "@./(0=0)/HEDS- (｢・ω・) · \\_(ツ)_/¯ · (◕ H ◕) · (／‵Д′)／-Secret-Key-i,.?w91j23ns9";
     private final String RefreshKey = "KEY_ssHEDS_refresh@./(0=0)/HEDS- (｢・ω・) · \\_(ツ)_/¯ · (◕ H ◕) · (／‵Д′)／-Secret-Key-i,.?w91j23ns9";
 
     private final long expireMillis = 10 * 60 * 60 * 60; // 1 Hour
-
         //Generate Token
         public String generateToken(String subject) {
             return Jwts.builder()
@@ -98,5 +97,4 @@ public class JWTUtils {
     public Date getExpirationDateREF(String token) {
         return getClaimsFromTokenREF(token).getExpiration();
     }
-
 }
