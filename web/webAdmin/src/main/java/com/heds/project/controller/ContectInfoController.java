@@ -1,5 +1,6 @@
 package com.heds.project.controller;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.heds.project.Service.AdminService;
 import com.heds.project.Service.ConsultationServer;
@@ -32,6 +33,7 @@ public class ContectInfoController {
     public Result<List<Consultation>> showcommon(HttpServletRequest request) {
         //show all common:
         return Result.ok(consultationServer.list());
+
     }
 
     @GetMapping("/ChangeStatus")
@@ -47,7 +49,7 @@ public class ContectInfoController {
         updateWrapper.set("status", 1);
         consultationServer.update(updateWrapper);
         //show all common:
-        return Result.ok(consultationServer.list());
+        return Result.ok(consultationServer.list(new QueryWrapper<Consultation>().like("status",0)));
     }
 
 }

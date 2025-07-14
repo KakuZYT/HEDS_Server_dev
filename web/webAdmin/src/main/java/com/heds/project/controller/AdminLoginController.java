@@ -61,7 +61,6 @@ public class AdminLoginController {
         if (header != null && header.startsWith("Bearer ")) {
             String token = header.substring(7);
             tokenWhiteList.remove(token); // remove token from whitelist
-            tokenWhiteList.printAllTokens();
             System.out.println("ok");
         }else{
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");

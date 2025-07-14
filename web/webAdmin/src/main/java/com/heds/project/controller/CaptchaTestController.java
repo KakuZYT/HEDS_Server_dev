@@ -17,9 +17,9 @@ public class CaptchaTestController {
         System.out.println(token);
         boolean success = hcaptchaService.verifyToken(token);
         if (success) {
-            return ResponseEntity.ok("✅ Captcha 验证成功！");
+            return ResponseEntity.ok("Captcha 验证成功！");
         } else {
-            return ResponseEntity.badRequest().body("❌ Captcha 验证失败！");
+            return ResponseEntity.badRequest().body("Captcha 验证失败！");
         }
     }
 }
