@@ -36,7 +36,6 @@ public class HcaptchaService {
 
         HttpEntity<MultiValueMap<String, String>> request = new HttpEntity<>(body, headers);
         ResponseEntity<Map> response = restTemplate.postForEntity(VERIFY_URL, request, Map.class);
-        System.out.println(response.getBody());
         if (response.getStatusCode() == HttpStatus.OK) {
             Map<String, Object> result = response.getBody();
             return Boolean.TRUE.equals(result.get("success"));

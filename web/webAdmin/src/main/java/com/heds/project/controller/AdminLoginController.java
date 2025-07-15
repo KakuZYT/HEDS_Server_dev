@@ -32,8 +32,7 @@ public class AdminLoginController {
 
     @PostMapping("/login")
     public Result<Object> login(@RequestParam String username, @RequestParam String password,HttpServletRequest request) {
-        List<Admin> list = adminService.list(new QueryWrapper<Admin>().like("name", "admin").like("password", "admin"));
-
+        List<Admin> list = adminService.list(new QueryWrapper<Admin>().eq("name", username).eq("password", password));
         if(!list.isEmpty()){
             String accessToken = jwtUtils.generateToken(username);
             String refreshToken = jwtUtils.generateRefreshToken(username);
@@ -48,9 +47,9 @@ public class AdminLoginController {
             request.getSession().setAttribute("user", username);
 
             return Result.ok(data);
+        }else {
+            return Result.fail();
         }
-
-        throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "Invalid credentials");
     }
 
     @PostMapping("/logout")

@@ -12,9 +12,12 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://192.168.64.3:3306/user_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-    username: "kaku"
-    password: "Kaku@010203"
+#    url: jdbc:mysql://192.168.64.3:3306/user_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+#    username: "kaku"
+#    password: "Kaku@010203"
+    url: jdbc:mysql://3.26.8.236:3306/user_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
+    username: "user1"
+    password: "user@010203"
     hikari:
       connection-test-query: SELECT 1 # 自动检测连接
       connection-timeout: 60000 #数据库连接超时时间,默认30秒
