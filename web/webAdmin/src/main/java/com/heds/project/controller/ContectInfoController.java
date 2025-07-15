@@ -36,7 +36,7 @@ public class ContectInfoController {
 
     }
 
-    @GetMapping("/ChangeStatus")
+    @GetMapping("/del")
     public Result<List<Consultation>> ChangeStatus(@RequestParam Integer id, HttpServletRequest request) {
         if (id == null) {
             // 如果未传 id，返回 400 Bad Request

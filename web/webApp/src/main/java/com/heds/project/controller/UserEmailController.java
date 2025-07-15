@@ -1,13 +1,14 @@
 package com.heds.project.controller;
 
-import com.heds.project.Service.ConsultationServer;
 import com.heds.project.config.captcha.HcaptchaService;
 import com.heds.project.config.modul.Consultation;
+import com.heds.project.result.Result;
 import jakarta.mail.MessagingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.heds.project.utils.MailService;
 import com.heds.project.mapper.ConsultationMapper;
+
 @RestController
 @RequestMapping("/user")
 public class UserEmailController {
@@ -18,9 +19,11 @@ public class UserEmailController {
     @Autowired
     private HcaptchaService hcaptchaService;
     @PostMapping("/submit")
-    public void submitInquiry(@RequestBody Consultation consultation,@RequestParam String captchaToken) {
+    public Result submitInquiry(@RequestBody Consultation consultation, @RequestParam String captchaToken) {
+        System.out.println(consultation);
+        System.out.println(captchaToken);
         if (!hcaptchaService.verifyToken(captchaToken)) {
-            throw new RuntimeException("验证码无效");
+            throw new RuntimeException("验证码无效 check code error");
         }
         System.out.println("接收到的数据：" + consultation);
         String to = "kaku616263@gmail.com"; // 收件人
@@ -50,11 +53,13 @@ public class UserEmailController {
            if (secIns != 1) {
                System.out.println("<UNK> 插入错误 insertError");
            }
+            return Result.ok();
         } catch (MessagingException e) {
-            System.out.println("发送失败 Failed");
+            System.out.println("发送失败 Failed" + e.getMessage());
+            return Result.fail();
         } catch (Exception e) {
             System.out.println("插入过程中出现异常：imsert Errpr!" + e.getMessage());
-
+            return Result.fail();
         }
     }
 }

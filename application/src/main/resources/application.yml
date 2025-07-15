@@ -31,3 +31,4 @@ mybatis-plus:
 
 hcaptcha:
   secret: ES_649fdcba8d5d4ce796a7abfdd170c4d2
+#  secret: 0x0000000000000000000000000000000000000000

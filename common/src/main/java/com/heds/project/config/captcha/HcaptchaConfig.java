@@ -7,10 +7,12 @@ public class HcaptchaConfig {
     private String secret;
 
     public String getSecret() {
+        System.out.println(secret);
         return secret;
     }
 
     public void setSecret(String secret) {
+        System.out.println(secret);
         this.secret = secret;
     }
 }
