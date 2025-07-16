@@ -31,9 +31,13 @@ public class ContectInfoController {
 
     @GetMapping("/ShowCommon")
     public Result<List<Consultation>> showcommon(HttpServletRequest request) {
+        try{
+            consultationServer.list(new QueryWrapper<Consultation>().eq("status",0));
+        }catch (Exception e){
+            return Result.fail();
+        }
         //show all common:
-        return Result.ok(consultationServer.list());
-
+        return Result.ok();
     }
 
     @GetMapping("/del")
