@@ -20,8 +20,8 @@ public class UserEmailController {
     private HcaptchaService hcaptchaService;
     @PostMapping("/submit")
     public Result submitInquiry(@RequestBody Consultation consultation, @RequestParam String captchaToken) {
-        System.out.println(consultation);
-        System.out.println(captchaToken);
+//        System.out.println(consultation);
+//        System.out.println(captchaToken);
         if (!hcaptchaService.verifyToken(captchaToken)) {
             throw new RuntimeException("验证码无效 check code error");
         }
@@ -46,12 +46,13 @@ public class UserEmailController {
             );
         try {
             mailService.sendHtmlMail(to, subject, htmlContent);
-            System.out.println("发送成功 Successful");
+//            System.out.println("发送成功 Successful");
             //存入数据库
             //store to database
            int secIns = consultationMapper.insert(consultation);
            if (secIns != 1) {
-               System.out.println("<UNK> 插入错误 insertError");
+//               System.out.println("<UNK> 插入错误 insertError");
+               return Result.fail();
            }
             return Result.ok();
         } catch (MessagingException e) {

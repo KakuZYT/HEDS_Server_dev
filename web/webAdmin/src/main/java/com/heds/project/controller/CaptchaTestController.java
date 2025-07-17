@@ -14,7 +14,7 @@ public class CaptchaTestController {
 
     @PostMapping("/test-captcha")
     public ResponseEntity<String> testCaptcha(@RequestParam("token") String token) {
-        System.out.println(token);
+//        System.out.println(token);
         boolean success = hcaptchaService.verifyToken(token);
         if (success) {
             return ResponseEntity.ok("Captcha 验证成功！");
