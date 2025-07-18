@@ -56,10 +56,10 @@ public class UserEmailController {
            }
             return Result.ok();
         } catch (MessagingException e) {
-            System.out.println("发送失败 Failed" + e.getMessage());
+//            System.out.println("发送失败 Failed" + e.getMessage());
             return Result.fail();
         } catch (Exception e) {
-            System.out.println("插入过程中出现异常：imsert Errpr!" + e.getMessage());
+//            System.out.println("插入过程中出现异常：imsert Errpr!" + e.getMessage());
             return Result.fail();
         }
     }
