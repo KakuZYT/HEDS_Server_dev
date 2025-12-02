@@ -1,9 +1,9 @@
 spring:
   mail:
-    host: smtp.sendgrid.net
-    port: 587
-    username: apikey
-    password: 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
+    host: 
+    port: 
+    username: 
+    password:
     protocol: smtp
     default-encoding: UTF-8
     properties:
@@ -12,12 +12,10 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-#    url: jdbc:mysql://192.168.64.3:3306/user_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-#    username: "kaku"
-#    password: "Kaku@010203"
-    url: jdbc:mysql://3.26.8.236:3306/user_system?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
-    username: "user1"
-    password: "user@010203"
+
+    url: j
+    username: ""
+    password: ""
     hikari:
       connection-test-query: SELECT 1 # 自动检测连接
       connection-timeout: 60000 #数据库连接超时时间,默认30秒
@@ -25,7 +23,7 @@ spring:
       max-lifetime: 540000 #此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
       maximum-pool-size: 12 #连接池最大连接数，默认是10
       minimum-idle: 10 #最小空闲连接数量
-      pool-name: SPHHikariPool # 连接池名称
+      pool-name:  # 连接池名称
 
 #用于打印框架生成的sql语句，便于调试
 mybatis-plus:
@@ -33,5 +31,4 @@ mybatis-plus:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
 hcaptcha:
-  secret: ES_649fdcba8d5d4ce796a7abfdd170c4d2
-#  secret: 0x0000000000000000000000000000000000000000
+  secret: 
