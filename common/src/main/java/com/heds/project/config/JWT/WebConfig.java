@@ -9,11 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
     @Autowired
     private JwtInterceptor jwtInterceptor;
+
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(jwtInterceptor) // 添加拦截器 add jwtInterceptor
-                .addPathPatterns("/manage/**") // Intercept all requests under the '/admin' path
-                .excludePathPatterns("/admin/auth"); // exclude ogin-related paths
+        registry.addInterceptor(jwtInterceptor)
+                .addPathPatterns("/manage/**");
     }
-
 }

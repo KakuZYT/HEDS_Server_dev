@@ -1,7 +1,6 @@
 package com.heds.project.controller;
 
 import com.heds.project.config.JWT.JWTUtils;
-import com.heds.project.config.token.TokenWhiteList;
 import com.heds.project.result.Result;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,31 +16,21 @@ import java.util.Map;
 public class TokenRefreshController {
     @Autowired
     private JWTUtils jwtUtils;
-    @Autowired
-    private TokenWhiteList tokenWhiteList;
 
     @PostMapping("/refresh")
     public Result<Map<String, String>> refreshToken(@RequestParam("refreshToken") String refreshToken) {
         try {
-            String username = jwtUtils.getUsernameFromToken(refreshToken);
+            if (!jwtUtils.validateRefreshToken(refreshToken)) {
+                return Result.fail();
+            }
 
-            // 验证是否过期
-            // check if token has expired
-            jwtUtils.validateRefreshToken(refreshToken);
-
-            // new token
+            String username = jwtUtils.getUsernameFromRefreshToken(refreshToken);
             String newAccessToken = jwtUtils.generateToken(username);
             String newRefreshToken = jwtUtils.generateRefreshToken(username);
 
             Map<String, String> data = new HashMap<>();
             data.put("accessToken", newAccessToken);
             data.put("refreshToken", newRefreshToken);
-
-            // Add the accessToken to the whitelist
-            // Add the accessToken to the whitelist
-            tokenWhiteList.add(newAccessToken,jwtUtils.getExpirationDate(newAccessToken).getTime());
-            tokenWhiteList.add(refreshToken,jwtUtils.getExpirationDateREF(newRefreshToken).getTime());
-            tokenWhiteList.printAllTokens();
 
             return Result.ok(data);
         } catch (Exception e) {
